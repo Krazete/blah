@@ -1,0 +1,305 @@
+<html>
+<head>
+	<style>
+		@font-face {
+		    font-family: 'Washington';
+		    src: url('WashingtonBoldDynamic.otf');
+		}
+		img {
+			position: absolute;
+		}
+		#base {
+			top: 0;
+			left: 0;
+		}
+		#animation {
+			top: 43px;
+			left: 190px;
+		}
+		#atk, #def {
+			top: 515px;
+			width: 60px;
+			cursor: pointer;
+		}
+		#atk:hover, #def:hover {
+			filter: drop-shadow(0 0 10px white);
+		}
+		#atk {
+			left: 530px;
+		}
+		#def {
+			left: 600px;
+		}
+		.transparent {
+			opacity: 0.5;
+		}
+		#moveset-atk, #moveset-def {
+			top: 543px;
+			left: 7px;
+		}
+		#movebox {
+		    top: 86px;
+		    left: 683px;
+		    cursor: not-allowed;
+		}
+		#scrollbox {
+			position: absolute;
+		    top: 86px;
+		    left: 683px;
+		    width: 627px;
+		    height: 521px;
+			overflow: scroll;
+		}
+		#scrollbox img {
+			position: relative;
+			width: 95%;
+			margin: -5px 5px;
+		}
+		#moveset-atk, #moveset-def, #scrollbox img {
+			-webkit-clip-path: polygon(
+				40.8% 4.8%,
+				59.2% 4.8%,
+				62.5% 19.7%,
+				98.5% 19.7%,
+				98.5% 94.8%,
+				1.5% 94.8%,
+				1.5% 19.7%,
+				37.5% 19.7%
+			);
+			clip-path: polygon(
+				40.8% 4.8%,
+				59.2% 4.8%,
+				62.5% 19.7%,
+				98.5% 19.7%,
+				98.5% 94.8%,
+				1.5% 94.8%,
+				1.5% 19.7%,
+				37.5% 19.7%
+			);
+		}
+		#scrollbox input {
+			display: none;
+		}
+		#scrollbox input + label {
+			cursor: pointer;
+		}
+		#scrollbox input + label:hover {
+			filter: drop-shadow(0 0 2px cyan);
+		}
+		#scrollbox input:checked + label {
+			filter: drop-shadow(0 0 10px cyan);
+		}
+		.button {
+			position: absolute;
+			top: 621px;
+			cursor: pointer;
+		}
+		.button:hover {
+			filter: drop-shadow(0 0 10px cyan);
+		}
+		.button:after {
+			position: relative;
+			top: 50px;
+			left: 128px;
+			transform: translate(-50%, -50%);
+			font-family: 'Washington';
+			font-size: 34px;
+			color: white;
+			text-shadow: 0 0 10px black;
+			text-transform: uppercase;
+			display: block;
+		}
+		.button img {
+			-webkit-clip-path: polygon(
+				6% 11%,
+				94% 11%,
+				94% 20%,
+				96% 20%,
+				96% 80%,
+				94% 80%,
+				94% 90%,
+				6% 90%,
+				6% 80%,
+				4% 80%,
+				4% 20%,
+				6% 20%
+			);
+			clip-path: polygon(
+				6% 11%,
+				94% 11%,
+				94% 20%,
+				96% 20%,
+				96% 80%,
+				94% 80%,
+				94% 90%,
+				6% 90%,
+				6% 80%,
+				4% 80%,
+				4% 20%,
+				6% 20%
+			);
+		}
+		#button-loadouts {
+			left: 610px;
+		}
+		#button-loadouts img {
+			transform: scaleX(0.3);
+		}
+		#button-loadouts:after {
+			content: 'Loadouts';
+		}
+		#button-equip-move {
+			left: 900px;
+			cursor: not-allowed;
+		}
+		#button-equip-move:after {
+			content: 'Equip';
+		}
+		#button-moves {
+			left: 610px;
+		}
+		#button-moves img {
+			transform: scaleX(0.3);
+		}
+		#button-moves:after {
+			content: 'Moves';
+		}
+		#button-save {
+			left: 790px;
+		}
+		#button-save:after {
+			content: 'Save';
+		}
+		#button-equip-loadout {
+			left: 1050px;
+		}
+		#button-equip-loadout:after {
+			content: 'Equip';
+		}
+		.hidden {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<img id="base" src="base.PNG">
+	<img id="animation" src="animation.gif">
+	<img id="moveset-atk" src="loadout-0.PNG">
+	<img id="moveset-def" src="loadout-0.PNG">
+	<img id="atk" src="SkillTreeNode-Damage.png">
+	<img id="def" src="SkillTreeNode-ArmorUp.png">
+	<img id="movebox" src="moves.PNG">
+	<div id="scrollbox">
+		<input id="r0" type="radio" name="loadout">
+		<label for="r0"><img src="loadout-1.PNG"></label>
+		<input id="r1" type="radio" name="loadout">
+		<label for="r1"><img src="loadout-2.PNG"></label>
+		<input id="r2" type="radio" name="loadout">
+		<label for="r2"><img src="loadout-3.PNG"></label>
+		<input id="r3" type="radio" name="loadout">
+		<label for="r3"><img src="loadout-0.PNG"></label>
+		<input id="r4" type="radio" name="loadout">
+		<label for="r4"><img src="loadout-0.PNG"></label>
+		<input id="r5" type="radio" name="loadout">
+		<label for="r5"><img src="loadout-0.PNG"></label>
+		<input id="r6" type="radio" name="loadout">
+		<label for="r6"><img src="loadout-0.PNG"></label>
+		<input id="r7" type="radio" name="loadout">
+		<label for="r7"><img src="loadout-0.PNG"></label>
+		<input id="r8" type="radio" name="loadout">
+		<label for="r8"><img src="loadout-0.PNG"></label>
+		<input id="r9" type="radio" name="loadout">
+		<label for="r9"><img src="loadout-1.PNG"></label>
+	</div>
+	<div id="button-loadouts" class="button"><img src="button-purple.PNG"></div>
+	<div id="button-equip-move" class="button"><img src="button-grey.PNG"></div>
+	<div id="button-moves" class="button"><img src="button-purple.PNG"></div>
+	<div id="button-save" class="button"><img src="button-orange.PNG"></div>
+	<div id="button-equip-loadout" class="button"><img src="button-orange.PNG"></div>
+	<script>
+		var atk = document.getElementById("atk");
+		var def = document.getElementById("def");
+		var movesetATK = document.getElementById("moveset-atk");
+		var movesetDEF = document.getElementById("moveset-def");
+		var moveset;
+
+		var buttonLoadouts = document.getElementById("button-loadouts");
+		var buttonEquipMoves = document.getElementById("button-equip-move");
+
+		var buttonMoves = document.getElementById("button-moves");
+		var buttonSave = document.getElementById("button-save");
+		var buttonEquipLoadout = document.getElementById("button-equip-loadout");
+
+		var movebox = document.getElementById("movebox");
+		var scrollbox = document.getElementById("scrollbox");
+		var inputs = scrollbox.getElementsByTagName("input");
+		var loadouts = scrollbox.getElementsByTagName("img");
+		
+		function goToATK() {
+			atk.classList.remove("transparent");
+			def.classList.add("transparent");
+			movesetATK.classList.remove("hidden");
+			movesetDEF.classList.add("hidden");
+			moveset = movesetATK;
+		}
+
+		function goToDEF() {
+			atk.classList.add("transparent");
+			def.classList.remove("transparent");
+			movesetATK.classList.add("hidden");
+			movesetDEF.classList.remove("hidden");
+			moveset = movesetDEF;
+		}
+
+		function goToMoves() {
+			movebox.classList.remove("hidden");
+			scrollbox.classList.add("hidden");
+			buttonLoadouts.classList.remove("hidden");
+			buttonEquipMoves.classList.remove("hidden");
+			buttonMoves.classList.add("hidden");
+			buttonSave.classList.add("hidden");
+			buttonEquipLoadout.classList.add("hidden");
+		}
+
+		function goToLoadouts() {
+			movebox.classList.add("hidden");
+			scrollbox.classList.remove("hidden");
+			buttonLoadouts.classList.add("hidden");
+			buttonEquipMoves.classList.add("hidden");
+			buttonMoves.classList.remove("hidden");
+			buttonSave.classList.remove("hidden");
+			buttonEquipLoadout.classList.remove("hidden");
+		}
+
+		function saveMoveset() {
+			for (var i = 0; i < inputs.length; i++) {
+				if (inputs[i].checked) {
+					loadouts[i].src = moveset.src;
+					break;
+				}
+			}
+		}
+
+		function loadMoveset() {
+			for (var i = 0; i < inputs.length; i++) {
+				if (inputs[i].checked) {
+					moveset.src = loadouts[i].src;
+					break;
+				}
+			}
+		}
+
+		atk.addEventListener("click", goToATK);
+		def.addEventListener("click", goToDEF);
+
+		buttonMoves.addEventListener("click", goToMoves);
+		buttonLoadouts.addEventListener("click", goToLoadouts);
+
+		buttonSave.addEventListener("click", saveMoveset);
+		buttonEquipLoadout.addEventListener("click", loadMoveset);
+
+		goToATK();
+		goToMoves();
+
+	</script>
+</body>

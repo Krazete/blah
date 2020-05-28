@@ -1,0 +1,74 @@
+<audio>
+	<source src="sound.m4a">
+</audio>
+<div id="gold">
+	<img src="SCP-L4546-N4.png">
+</div>
+<div id="diamond">
+	<img src="download.png">
+</div>
+<style>
+	body {
+		text-align: center;
+	}
+	#gold, #diamond {
+		position: relative;
+		width: max-content;
+		margin: auto;
+		cursor: pointer;
+	}
+	#gold {
+		margin-bottom: -504px;
+	}
+	#gold.start {
+		cursor: auto;
+		animation: 5s spin-gold ease forwards;
+	}
+	#diamond {
+		opacity: 0;
+	}
+	#diamond.start {
+		cursor: auto;
+		animation: 5s spin-diamond ease forwards;
+	}
+	#diamond.start:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		display: block;
+		background: linear-gradient(to bottom right, rgba(255, 255, 255, 0) 45%, white 50%, rgba(255, 255, 255, 0) 55%);
+		opacity: 0;
+		animation: 1.5s 5s shine linear 2;
+	}
+	@keyframes spin-gold {
+		from {transform: perspective(1200px) rotateY(0deg); opacity: 1;}
+		to {transform: perspective(1200px) rotateY(3600deg); opacity: 0;}
+	}
+	@keyframes spin-diamond {
+		from {transform: perspective(1200px) rotateY(0deg); opacity: 0;}
+		to {transform: perspective(1200px) rotateY(3600deg); opacity: 1;}
+	}
+	@keyframes shine {
+		from {transform: translate(-50%, -50%); opacity: 0.5;}
+		to {transform: translate(50%, 50%); opacity: 0.5;}
+	}
+</style>
+<script>
+	var audio = document.getElementsByTagName("audio")[0];
+	var gold = document.getElementById("gold");
+	var diamond = document.getElementById("diamond");
+
+	function spin() {
+		audio.play();
+		gold.classList.add("start");
+		diamond.classList.add("start");
+		gold.removeEventListener("click", spin);
+		diamond.removeEventListener("click", spin);
+	}
+
+	gold.addEventListener("click", spin);
+	diamond.addEventListener("click", spin);
+</script>

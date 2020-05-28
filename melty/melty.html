@@ -1,0 +1,41 @@
+<style>
+	audio {
+		pointer-events: none;
+	}
+</style>
+<audio src="melty.mp4" controls></audio>
+<audio src="meltyblack.mp4" controls></audio>
+<div id="text"></div>
+<div id="state">Click anywhere to start playing.</div>
+<script>
+	var text = document.getElementById("text");
+	var state = document.getElementById("state");
+	var mp4 = document.getElementsByTagName("audio");
+	function toggleAudio() {
+		if (mp4[0].paused || mp4[1].paused) {
+			mp4[0].play();
+			mp4[1].play();
+			state.innerHTML = "PLAYING";
+		}
+		else {
+			mp4[0].pause();
+			mp4[1].pause();
+			state.innerHTML = "PAUSED";
+		}
+	}
+	function switchAudio() {
+		if (mp4[0].volume) {
+			mp4[0].volume = 0;
+			mp4[1].volume = 0.75;
+			text.innerHTML = "BLACK AI";
+		}
+		else {
+			mp4[0].volume = 1;
+			mp4[1].volume = 0;
+			text.innerHTML = "KIZUNA AI";
+		}
+		setTimeout(switchAudio, 1000);
+	}
+	window.addEventListener("click", toggleAudio);
+	switchAudio();
+</script>
