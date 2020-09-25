@@ -13,11 +13,6 @@
 
 <script src="https://www.youtube.com/iframe_api"></script>
 
-<div id="rfSWNAimW1g"></div>
-<div id="6W7mk3MjsAg"></div>
-<div id="dLmCjqqhBbY"></div>
-<div id="7yt7FbgnLLY"></div>
-
 <script>
 var players, ids = [
 	"rfSWNAimW1g",
@@ -43,6 +38,7 @@ function onPlayerStateChange(event) {
 }
 
 function onYouTubeIframeAPIReady() {
+	ids.forEach(id => document.body.appendChild(document.createElement("div")).id = id);
 	players = ids.map(id => new YT.Player(id, {
 		videoId: id,
 		events: {"onStateChange": onPlayerStateChange}
