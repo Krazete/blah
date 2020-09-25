@@ -10,7 +10,42 @@
 		height: 100%;
 	}
 </style>
-<iframe src="https://www.youtube.com/embed/rfSWNAimW1g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<iframe src="https://www.youtube.com/embed/6W7mk3MjsAg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<iframe src="https://www.youtube.com/embed/dLmCjqqhBbY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<iframe src="https://www.youtube.com/embed/7yt7FbgnLLY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<div id="rfSWNAimW1g"></div>
+<div id="6W7mk3MjsAg"></div>
+<div id="dLmCjqqhBbY"></div>
+<div id="7yt7FbgnLLY"></div>
+
+<script>
+var players, ids = [
+	"rfSWNAimW1g",
+	"6W7mk3MjsAg",
+	"dLmCjqqhBbY",
+	"7yt7FbgnLLY"
+];
+
+function onPlayerStateChange(event) {
+	for (var player of players) {
+		player.playVideo();
+		player == event.target ? player.unMute() : player.mute();
+	}
+	// if (event.target.getPlayerState() == YT.PlayerState.BUFFERING) {
+	// 	event.target.mute();
+	// 	for (var player of players) {
+	// 		if (player.getPlayerState() != YT.PlayerState.BUFFERING) {
+	// 			player.unMute();
+	// 			break;
+	// 		}
+	// 	}
+	// }
+}
+
+function onYouTubeIframeAPIReady() {
+	players = ids.map(id => new YT.Player(id, {
+		videoId: id,
+		events: {"onStateChange": onPlayerStateChange}
+	}));
+}
+</script>
