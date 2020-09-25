@@ -24,17 +24,10 @@ var players, ids = [
 function onPlayerStateChange(event) {
 	for (var player of players) {
 		player.playVideo();
-		player == event.target ? player.unMute() : player.mute();
+		if (event.target.getPlayerState() == YT.PlayerState.PLAYING) {
+			player == event.target ? player.unMute() : player.mute();
+		}
 	}
-	// if (event.target.getPlayerState() == YT.PlayerState.BUFFERING) {
-	// 	event.target.mute();
-	// 	for (var player of players) {
-	// 		if (player.getPlayerState() != YT.PlayerState.BUFFERING) {
-	// 			player.unMute();
-	// 			break;
-	// 		}
-	// 	}
-	// }
 }
 
 function onYouTubeIframeAPIReady() {
