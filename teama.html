@@ -31,11 +31,11 @@
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-var players, ids = [
-	"rfSWNAimW1g",
-	"6W7mk3MjsAg",
-	"dLmCjqqhBbY",
-	"7yt7FbgnLLY"
+var players, info = [
+	{id: "rfSWNAimW1g", start: 161},
+	{id: "6W7mk3MjsAg", start: 482},
+	{id: "dLmCjqqhBbY", start: 105},
+	{id: "7yt7FbgnLLY", start: 178}
 ];
 
 function onPlayerStateChange(event) {
@@ -48,9 +48,14 @@ function onPlayerStateChange(event) {
 }
 
 function onYouTubeIframeAPIReady() {
-	ids.forEach(id => document.body.appendChild(document.createElement("div")).id = id);
-	players = ids.map(id => new YT.Player(id, {
-		videoId: id,
+	info.forEach(e => document.body.appendChild(document.createElement("div")).id = e.id);
+	players = info.map(e => new YT.Player(e.id, {
+		videoId: e.id,
+		playerVars: {
+			start: e.start,
+			fs: 0,
+			modestbranding: 1
+		},
 		events: {"onStateChange": onPlayerStateChange}
 	}));
 }
