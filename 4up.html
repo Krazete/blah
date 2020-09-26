@@ -1,0 +1,56 @@
+<style>
+	html, body {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+	}
+	iframe {
+		position: relative;
+		width: 50%;
+		height: 50%;
+	}
+	iframe:first-child {
+		top: 0;
+		left: 0;
+	}
+	iframe:nth-child(2) {
+		top: 0;
+		right: 0;
+	}
+	iframe:nth-child(3) {
+		bottom: 0;
+		left: 0;
+	}
+	iframe:last-child {
+		bottom: 0;
+		right: 0;
+	}
+</style>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+var players, ids = location.search.slice(1).split("&");
+
+function onPlayerStateChange(event) {
+	for (var player of players) {
+		player.playVideo();
+		if (event.target.getPlayerState() == YT.PlayerState.PLAYING) {
+			player == event.target ? player.unMute() : player.mute();
+		}
+	}
+}
+
+function onYouTubeIframeAPIReady() {
+	ids.forEach(id => document.body.appendChild(document.createElement("div")).id = id);
+	players = ids.map(id => new YT.Player(id, {
+		videoId: id,
+		playerVars: {
+			fs: 0,
+			modestbranding: 1
+		},
+		events: {"onStateChange": onPlayerStateChange}
+	}));
+}
+</script>
