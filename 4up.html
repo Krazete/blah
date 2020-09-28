@@ -34,13 +34,22 @@
 var players, ids = location.search.slice(1).split("&");
 
 function onPlayerStateChange(event) {
+	// console.log(
+	// 	event.target.getVideoUrl(),
+	// 	Array.from(Object.keys(YT.PlayerState)).filter(e => YT.PlayerState[e] == event.target.previousState)[0],
+	// 	Array.from(Object.keys(YT.PlayerState)).filter(e => YT.PlayerState[e] == event.target.getPlayerState())[0]
+	// );
 	for (var player of players) {
-		player.playVideo();
-		if (event.target.getPlayerState() == YT.PlayerState.PLAYING && event.target.previousState != YT.PlayerState.BUFFERING) {
+		if (
+			event.target.previousState == YT.PlayerState.UNSTARTED ||
+			event.target.previousState == YT.PlayerState.PAUSED &&
+			event.target.getPlayerState() == YT.PlayerState.PLAYING
+		) {
 			player == event.target ? player.unMute() : player.mute();
 		}
-		player.previousState = player.getPlayerState();
+		player.playVideo();
 	}
+	event.target.previousState = event.target.getPlayerState();
 }
 
 function onYouTubeIframeAPIReady() {
