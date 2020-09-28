@@ -36,9 +36,10 @@ var players, ids = location.search.slice(1).split("&");
 function onPlayerStateChange(event) {
 	for (var player of players) {
 		player.playVideo();
-		if (event.target.getPlayerState() == YT.PlayerState.PLAYING) {
+		if (event.target.getPlayerState() == YT.PlayerState.PLAYING && event.target.previousState != YT.PlayerState.BUFFERING) {
 			player == event.target ? player.unMute() : player.mute();
 		}
+		player.previousState = player.getPlayerState();
 	}
 }
 
@@ -52,5 +53,8 @@ function onYouTubeIframeAPIReady() {
 		},
 		events: {"onStateChange": onPlayerStateChange}
 	}));
+	for (var player of players) {
+		player.previousState = YT.PlayerState.UNSTARTED;
+	}
 }
 </script>
