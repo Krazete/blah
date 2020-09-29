@@ -28,23 +28,53 @@
 	}
 </style>
 
-<script src="https://www.youtube.com/iframe_api"></script>
+<button value="0">2020-10-25</button>
+<button value="1">2020-10-29</button>
 
 <script>
-var players, info = [
-	{id: "rfSWNAimW1g", start: 161},
-	{id: "6W7mk3MjsAg", start: 482},
-	{id: "dLmCjqqhBbY", start: 105},
-	{id: "7yt7FbgnLLY", start: 178}
+var players, info, infos = [
+	[
+		{id: "rfSWNAimW1g", start: 161},
+		{id: "6W7mk3MjsAg", start: 482},
+		{id: "dLmCjqqhBbY", start: 105},
+		{id: "7yt7FbgnLLY", start: 178}
+	],
+	[
+		{id: "9Vz2GyTjG9Q", start: 240},
+		{id: "6ZoNbL8sZ9M", start: 538},
+		{id: "6fuB4_kTRTA", start: 167},
+		{id: "Vz25XmAV5nc", start: 0}
+	]
 ];
+
+function startYouTube(e) {
+	if (e.target.tagName == "BUTTON") {
+		var buttons = document.getElementsByTagName("button");
+		var script = document.createElement("script");
+
+		info = infos[e.target.value];
+		for (var button of buttons) {
+			button.remove();
+		}
+		script.src = "https://www.youtube.com/iframe_api";
+		document.body.appendChild(script);
+		
+		window.removeEventListener("click", startYouTube);
+	}
+}
 
 function onPlayerStateChange(event) {
 	for (var player of players) {
-		player.playVideo();
-		if (event.target.getPlayerState() == YT.PlayerState.PLAYING) {
+		if (
+			event.target.previousState == YT.PlayerState.UNSTARTED ||
+			event.target.previousState == YT.PlayerState.PAUSED &&
+			event.target.getPlayerState() == YT.PlayerState.PLAYING
+		) {
 			player == event.target ? player.unMute() : player.mute();
 		}
+		player.playVideo();
 	}
+	event.target.previousState = event.target.getPlayerState();
 }
 
 function onYouTubeIframeAPIReady() {
@@ -58,5 +88,10 @@ function onYouTubeIframeAPIReady() {
 		},
 		events: {"onStateChange": onPlayerStateChange}
 	}));
+	for (var player of players) {
+		player.previousState = YT.PlayerState.UNSTARTED;
+	}
 }
+
+window.addEventListener("click", startYouTube);
 </script>
