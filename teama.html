@@ -81,6 +81,7 @@ function onPlayerStateChange(event) {
 			event.target.previousState == YT.PlayerState.PLAYING &&
 			event.target.getPlayerState() == YT.PlayerState.PAUSED
 		) {
+			player.unMute();
 			player.pauseVideo();
 		}
 		else {
