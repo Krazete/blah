@@ -49,17 +49,16 @@ var players, info, infos = [
 
 function startYouTube(e) {
 	if (e.target.tagName == "BUTTON") {
-		var buttons = document.getElementsByTagName("button");
-		var script = document.createElement("script");
-
+		window.removeEventListener("click", startYouTube);
+		
+		do {
+			document.getElementsByTagName("button")[0].remove();
+		} while (document.getElementsByTagName("button").length);
 		info = infos[e.target.value];
-		for (var button of buttons) {
-			button.remove();
-		}
+		
+		var script = document.createElement("script");
 		script.src = "https://www.youtube.com/iframe_api";
 		document.body.appendChild(script);
-		
-		window.removeEventListener("click", startYouTube);
 	}
 }
 
