@@ -116,6 +116,7 @@
 		})
 		runner = Matter.Runner.create();
 
+		Matter.Render.setPixelRatio(render, 0.5)
 		Matter.Render.run(render);
 		Matter.Runner.run(runner, engine);
 		initMouse();
