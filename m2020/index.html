@@ -73,8 +73,8 @@
 			}
 		}
 
-		if (world.bodies.length < unit * 3) {
-			for (var i = 0; i < 3; i++) {
+		if (world.bodies.length < unit * 2) {
+			for (var i = 0; i < 2; i++) {
 				var rX = (Math.random() * 1.5 - 0.25) * unit;
 				var rR = unit / 500 + Math.random() * (4 * unit) / 500;
 				var cookie = Matter.Bodies.circle(rX, -rR, rR, {"label": "cookie"});
