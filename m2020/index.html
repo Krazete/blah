@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>Title</title>
+<style>
+	html {
+		background: black;
+	}
+	body {
+		margin: 0;
+	}
+	canvas {
+		position: relative;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+</style>
+<script src="decomp.js"></script>
+<script src="matter.min.js"></script>
+</head>
+<body>
+<script>
+	var unit, data, cycleID;
+	var engine, world, render, runner;
+
+	function calculateText() {
+		var canvas = document.createElement("canvas");
+		canvas.width = unit;
+		canvas.height = unit;
+
+		var context = canvas.getContext("2d");
+		context.font = unit / 4 + "px Trebuchet";
+		context.fillText(
+			"HAPPY",
+			(unit - Math.min(unit, context.measureText("HAPPY").width)) / 2,
+			unit * 9 / 30,
+			unit
+		);
+		context.fillText(
+			"B-DAY",
+			(unit - Math.min(unit, context.measureText("B-DAY").width)) / 2,
+			unit * 17 / 30,
+			unit
+		);
+		context.fillText(
+			"MARIELLA",
+			(unit - Math.min(unit, context.measureText("MARIELLA").width)) / 2,
+			unit * 25 / 30,
+			unit
+		);
+
+		data = context.getImageData(0, 0, unit, unit);
+	}
+
+	function cycle() {
+		cycleID = requestAnimationFrame(cycle);
+
+		for (var cookie of world.bodies) {
+			if (cookie.label == "cookie") {
+				var x = Math.floor(cookie.position.x);
+				var y = Math.floor(cookie.position.y);
+				if (data.data[4 * (y * unit + x) + 3]) {
+					cookie.frictionAir = 1;
+					cookie.render.fillStyle = "#FFFFFF";
+				}
+				else {
+					cookie.frictionAir = cookie.saved.friction;
+					cookie.render.fillStyle = cookie.saved.fill;
+				}
+				if (cookie.position.y > unit + cookie.circleRadius) {
+					Matter.Composite.remove(world, cookie);
+				}
+			}
+		}
+
+		if (world.bodies.length < unit * 3) {
+			for (var i = 0; i < 3; i++) {
+				var rX = (Math.random() * 2 - 0.5) * unit;
+				var rR = unit / 500 + Math.random() * (4 * unit) / 500;
+				var cookie = Matter.Bodies.circle(rX, -rR, rR, {"label": "cookie"});
+				cookie.saved = {
+					"friction": Math.random() / 10,
+					"fill": cookie.render.fillStyle
+				};
+				Matter.World.add(world, cookie);
+			}
+		}
+
+		world.gravity.x = Math.max(-0.5, Math.min(world.gravity.x + Math.random() / 10 - 0.05, 0.5));
+	}
+
+	function initMouse() {
+		var mouse = Matter.Mouse.create(render.canvas);
+		var mouseConstraint = Matter.MouseConstraint.create(engine, {
+			"mouse": mouse,
+			"constraint": {
+				"stiffness": 0.1,
+				"render": {"visible": false}
+			}
+		});
+
+		Matter.World.add(world, mouseConstraint);
+	}
+
+	function initMatter(e) {
+		engine = Matter.Engine.create();
+		world = engine.world;
+		render = Matter.Render.create({
+			"element": document.body,
+			"engine": engine,
+			"options": {
+				"width": unit,
+				"height": unit,
+				"wireframes": false
+			}
+		})
+		runner = Matter.Runner.create();
+
+		Matter.Render.run(render);
+		Matter.Runner.run(runner, engine);
+		initMouse();
+	}
+
+	function init() {
+		var newUnit = Math.min(innerWidth, innerHeight);
+		if (newUnit != unit) {
+			unit = newUnit;
+			document.body.innerHTML = "";
+			calculateText();
+			initMatter();
+			cancelAnimationFrame(cycleID);
+			cycle();
+		}
+	}
+
+	window.addEventListener("DOMContentLoaded", init);
+	window.addEventListener("resize", init);
+</script>
+</body>
+</html>
