@@ -75,7 +75,7 @@
 
 		if (world.bodies.length < unit * 3) {
 			for (var i = 0; i < 3; i++) {
-				var rX = (Math.random() * 2 - 0.5) * unit;
+				var rX = (Math.random() * 1.5 - 0.25) * unit;
 				var rR = unit / 500 + Math.random() * (4 * unit) / 500;
 				var cookie = Matter.Bodies.circle(rX, -rR, rR, {"label": "cookie"});
 				cookie.saved = {
@@ -116,7 +116,6 @@
 		})
 		runner = Matter.Runner.create();
 
-		Matter.Render.setPixelRatio(render, 0.5)
 		Matter.Render.run(render);
 		Matter.Runner.run(runner, engine);
 		initMouse();
