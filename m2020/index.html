@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Title</title>
+<title>M2020</title>
 <style>
 	html {
 		background: black;
@@ -15,7 +15,6 @@
 		transform: translate(-50%, -50%);
 	}
 </style>
-<script src="decomp.js"></script>
 <script src="matter.min.js"></script>
 </head>
 <body>
@@ -55,6 +54,7 @@
 	function cycle() {
 		cycleID = requestAnimationFrame(cycle);
 
+		var trash = [];
 		for (var cookie of world.bodies) {
 			if (cookie.label == "cookie") {
 				var x = Math.floor(cookie.position.x);
@@ -68,15 +68,16 @@
 					cookie.render.fillStyle = cookie.saved.fill;
 				}
 				if (cookie.position.y > unit + cookie.circleRadius) {
-					Matter.Composite.remove(world, cookie);
+					trash.push(cookie);
 				}
 			}
 		}
+		Matter.Composite.remove(world, trash);
 
-		if (world.bodies.length < unit * 2) {
-			for (var i = 0; i < 2; i++) {
+		if (world.bodies.length < 1000) {
+			for (var i = 0; i < Math.ceil(Math.random() * 2); i++) {
 				var rX = (Math.random() * 1.5 - 0.25) * unit;
-				var rR = unit / 500 + Math.random() * (4 * unit) / 500;
+				var rR = unit / 500 + Math.random() * 4 * unit / 500;
 				var cookie = Matter.Bodies.circle(rX, -rR, rR, {"label": "cookie"});
 				cookie.saved = {
 					"friction": Math.random() / 10,
@@ -109,6 +110,7 @@
 			"element": document.body,
 			"engine": engine,
 			"options": {
+				"background": "transparent",
 				"width": unit,
 				"height": unit,
 				"wireframes": false
