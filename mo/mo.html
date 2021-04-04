@@ -1,0 +1,184 @@
+<style>
+	video {
+		width: 1280px;
+		height: 720px;
+	}
+	div {
+		color: pink;
+		font-family: "Avenir";
+		font-weight: bold;
+		font-size: 50px;
+		text-shadow: 2px 4px 6px black;
+		-webkit-text-stroke: 0.04em deeppink;
+		position: absolute;
+		transform: translate(-50%, -50%);
+	}
+</style>
+<video src="mo.mov" controls>
+<script>
+	var pad = 25;
+	var animations = [];
+	var stamps = [
+		/*  1 */ {t:  0.066, d: 1.0, x:  640, y:  640, a:  grow, m: "mo"},
+		/*  2 */ {t:  2.000, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/*  3 */ {t:  2.199, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/*  4 */ {t:  2.366, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/*  5 */ {t:  2.633, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/*  6 */ {t:  2.866, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/*  7 */ {t:  4.066, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/*  8 */ {t:  4.300, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/*  9 */ {t:  4.466, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 10 */ {t:  4.633, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 11 */ {t:  4.766, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 12 */ {t:  4.900, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 13 */ {t:  5.066, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 14 */ {t:  5.266, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 15 */ {t:  5.433, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 16 */ {t:  5.633, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 17 */ {t:  5.766, d: 1.0, x: rx(), y: ry(), a:  grow, m: "も"},
+		/* 18 */ {t:  6.099, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 19 */ {t:  6.833, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 20 */ {t:  7.000, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 21 */ {t:  7.166, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 22 */ {t:  7.599, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 23 */ {t:  7.733, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 24 */ {t:  7.900, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 25 */ {t:  8.199, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 26 */ {t:  8.366, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 27 */ {t:  8.666, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 28 */ {t:  8.866, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 29 */ {t:  9.433, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 30 */ {t:  9.533, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 31 */ {t:  9.599, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 32 */ {t:  9.733, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 33 */ {t:  9.866, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 34 */ {t: 10.033, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 35 */ {t: 10.233, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 36 */ {t: 10.433, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 37 */ {t: 10.866, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 38 */ {t: 11.000, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 39 */ {t: 11.133, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 40 */ {t: 11.300, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 41 */ {t: 11.466, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 42 */ {t: 11.633, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 43 */ {t: 12.099, d: 2.0, x: rx(), y: ry(), a:  grow, m: "毛"},
+		/* 44 */ {t: 15.066, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 45 */ {t: 16.599, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 46 */ {t: 16.800, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 47 */ {t: 17.000, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 48 */ {t: 17.366, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 49 */ {t: 17.566, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 50 */ {t: 17.966, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 51 */ {t: 18.133, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 52 */ {t: 19.400, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 53 */ {t: 19.666, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 54 */ {t: 19.933, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 55 */ {t: 20.333, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 56 */ {t: 20.533, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 57 */ {t: 20.966, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 58 */ {t: 21.199, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 59 */ {t: 22.099, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 60 */ {t: 22.300, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 61 */ {t: 22.533, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 62 */ {t: 22.866, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 63 */ {t: 23.066, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 64 */ {t: 23.433, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 65 */ {t: 23.633, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 66 */ {t: 24.366, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 67 */ {t: 24.966, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 68 */ {t: 25.133, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 69 */ {t: 25.266, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 70 */ {t: 25.500, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 71 */ {t: 25.666, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 72 */ {t: 25.966, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 73 */ {t: 26.166, d: 0.1, x: rx(), y: ry(), a: false, m: mo()},
+		/* 74 */ {t: 26.333, d: 0.1, x: rx(), y: ry(), a: false, m: "な"},
+		/* 75 */ {t: 26.500, d: 0.1, x: rx(), y: ry(), a: false, m: "の"},
+		/* 76 */ {t: 26.666, d: 0.1, x: rx(), y: ry(), a: false, m: "ら"},
+		/* 77 */ {t: 26.833, d: 0.1, x: rx(), y: ry(), a: false, m: "け"},
+		/* 78 */ {t: 27.066, d: 0.1, x: rx(), y: ry(), a: false, m: "ど"}
+	];
+
+	function rx() {
+		return pad + (1280 - 2 * pad) * Math.random();
+	}
+	function ry() {
+		return pad + (720 - 2 * pad) * Math.random();
+	}
+	function mo() {
+		return ["mo", "も", "毛"][Math.floor(3 * Math.random())];
+	}
+
+	function animate() {
+		for (var animation of animations) {
+			if (Date.now() - animation.now < 1000 * animation.duration) {
+				animation.play();
+			}
+		}
+		requestAnimationFrame(animate);
+	}
+
+	function grow(div) {
+		if (div.style.fontSize == "") {
+			div.style.fontSize = getComputedStyle(div).fontSize;
+		}
+		div.style.fontSize = parseInt(div.style.fontSize) + 1 + "px";
+	}
+
+	function spin(div) {
+		if (div.style.transform == "") {
+			div.style.transform = getComputedStyle(div).transform;
+		}
+		div.style.transform = parseInt(div.style.transform) + 10 + "px";
+	}
+
+	var vid = document.querySelector("video");
+	vid.addEventListener("play", function () {
+		var i = 0;
+		while (document.querySelector("div")) {
+			document.querySelector("div").remove();
+		}
+		for (var stamp of stamps) {
+			(function (stamp, i) {
+				setTimeout(function () {
+					var div = document.createElement("div");
+					div.innerHTML = stamp.m;
+					div.style.left = stamp.x + "px";
+					div.style.top = stamp.y + "px";
+					div.dataset.i = i;
+					document.body.appendChild(div);
+					if (stamp.a) {
+						animations.push({
+							now: Date.now(),
+							duration: stamp.d,
+							play: stamp.a.bind(stamp, div)
+						});
+					}
+				}, stamp.t * 1000);
+			})(stamp, i++);
+		}
+	});
+
+	animate();
+
+	var target;
+	function down(e) {
+		if (e.target.tagName == "DIV") {
+			target = e.target;
+			window.addEventListener("mousemove", move);
+			window.addEventListener("mouseup", up);
+		}
+	}
+	function move(e) {
+		stamps[target.dataset.i].x = e.clientX;
+		stamps[target.dataset.i].y = e.clientY;
+		target.style.left = e.clientX + "px";
+		target.style.top = e.clientY + "px";
+	}
+	function up() {
+		window.removeEventListener("mousemove", move);
+		window.removeEventListener("mouseup", up);
+	}
+
+	window.addEventListener("mousedown", down);
+</script>
