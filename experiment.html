@@ -25,7 +25,7 @@
         return new Promise(request);
     }
 
-    loadJSON("https://sgm.netlify.com/data/variants.json").then(function (variants) {
+    loadJSON("https://raw.githubusercontent.com/Krazete/sgm/temp/data/variants.json").then(function (variants) {
     var points = [];
     for (var id in variants) {
         var stats = variants[id].stats;
