@@ -24,7 +24,7 @@
                 }
                 else {
                     this.type = "text";
-                    this.value = (Math.round(this.value * this.step) / this.step).toLocaleString();
+                    this.value = (Math.round(this.value / this.step) * this.step).toLocaleString();
                 }
             }
 
