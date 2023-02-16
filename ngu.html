@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <title>NGU Balancer</title>
+        <script>
+            var inputs;
+            var balance = {
+                "energy": {"cap": 8, "power": 300000, "bars": 15},
+                "magic": {"cap": 8, "power": 300000, "bars": 0},
+                "adventure": {"power": 50, "toughness": 50, "health": 500, "regen": 3},
+            };
+
+            function adjust() {
+                var thisID = this.id.split("-");
+                for (var input of inputs) {
+                    var thatID = input.id.split("-");
+                    if (thisID[0] == thatID[0]) {
+                        if (thisID[1] != thatID[1]) {
+                            input.value = balance[thatID[0]][thatID[1]] * this.value / balance[thisID[0]][thisID[1]];
+                        }
+                    }
+                }
+            }
+
+            function init() {
+                inputs = [
+                    document.getElementById("energy-cap"),
+                    document.getElementById("energy-power"),
+                    document.getElementById("energy-bars")
+                    document.getElementById("magic-cap"),
+                    document.getElementById("magic-power"),
+                    document.getElementById("magic-bars")
+                    document.getElementById("adventure-power"),
+                    document.getElementById("adventure-toughness"),
+                    document.getElementById("adventure-health"),
+                    document.getElementById("adventure-regen")
+                ];
+                for (var input of inputs) {
+                    input.addEventListener("input", adjust);
+                }
+            }
+
+            window.addEventListener("load", init);
+        </script>
+    </head>
+    <body>
+        <h1>Energy</h1>
+        <div class="">
+            <label>
+                Base Energy Cap
+                <br>
+                <input type="number" id="energy-cap">
+            </label>
+            <label>
+                Base Energy Power
+                <br>
+                <input type="number" id="energy-power">
+            </label>
+            <label>
+                Base Energy Bars
+                <br>
+                <input type="number" id="energy-bars">
+            </label>
+        </div>
+        <h1>Magic</h1>
+        <div>
+            <label>
+                Base Magic Cap
+                <br>
+                <input type="number" id="magic-cap">
+            </label>
+            <label>
+                Base Magic Power
+                <br>
+                <input type="number" id="magic-power">
+            </label>
+            <label>
+                Base Magic Bars
+                <br>
+                <input type="number" id="magic-bars">
+            </label>
+        </div>
+        <h1>Adventure</h1>
+        <div>
+            <label>
+                Base Power
+                <br>
+                <input type="number" id="adventure-power">
+            </label>
+            <label>
+                Base Toughness
+                <br>
+                <input type="number" id="adventure-toughness">
+            </label>
+            <label>
+                Base Health
+                <br>
+                <input type="number" id="adventure-health">
+            </label>
+            <label>
+                Base Regen
+                <br>
+                <input type="number" id="adventure-regen">
+            </label>
+        </div>
+    </body>
+</html>
