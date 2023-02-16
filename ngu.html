@@ -18,6 +18,7 @@
                 if (this == document.activeElement) {
                     this.value = parseFloat(this.value.replace(/[^\d\.]/g, ""));
                     this.type = "number";
+                    this.select();
                 }
                 else {
                     this.type = "text";
