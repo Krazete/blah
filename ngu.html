@@ -1,6 +1,11 @@
 <html>
     <head>
         <title>NGU Balancer</title>
+        <style>
+            div.flex {
+                display: flex;
+            }
+        </style>
         <script>
             var inputs;
             var balance = {
@@ -25,10 +30,10 @@
                 inputs = [
                     document.getElementById("energy-cap"),
                     document.getElementById("energy-power"),
-                    document.getElementById("energy-bars")
+                    document.getElementById("energy-bars"),
                     document.getElementById("magic-cap"),
                     document.getElementById("magic-power"),
-                    document.getElementById("magic-bars")
+                    document.getElementById("magic-bars"),
                     document.getElementById("adventure-power"),
                     document.getElementById("adventure-toughness"),
                     document.getElementById("adventure-health"),
@@ -44,7 +49,7 @@
     </head>
     <body>
         <h1>Energy</h1>
-        <div class="">
+        <div class="flex">
             <label>
                 Base Energy Cap
                 <br>
@@ -62,7 +67,7 @@
             </label>
         </div>
         <h1>Magic</h1>
-        <div>
+        <div class="flex">
             <label>
                 Base Magic Cap
                 <br>
@@ -80,7 +85,7 @@
             </label>
         </div>
         <h1>Adventure</h1>
-        <div>
+        <div class="flex">
             <label>
                 Base Power
                 <br>
