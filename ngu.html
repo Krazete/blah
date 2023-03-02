@@ -11,6 +11,7 @@
             var balance = {
                 "energy": {"power": 8, "cap": 300000, "bars": 15},
                 "magic": {"power": 8, "cap": 300000, "bars": 15},
+                "resource3": {"power": 15, "cap": 400, "bars": 8},
                 "adventure": {"power": 50, "toughness": 50, "health": 500, "regen": 3},
             };
 
@@ -43,18 +44,7 @@
             }
 
             function init() {
-                inputs = [
-                    document.getElementById("energy-power"),
-                    document.getElementById("energy-cap"),
-                    document.getElementById("energy-bars"),
-                    document.getElementById("magic-power"),
-                    document.getElementById("magic-cap"),
-                    document.getElementById("magic-bars"),
-                    document.getElementById("adventure-power"),
-                    document.getElementById("adventure-toughness"),
-                    document.getElementById("adventure-health"),
-                    document.getElementById("adventure-regen")
-                ];
+                inputs = document.getElementsByTagName("input");
                 for (var input of inputs) {
                     input.addEventListener("focus", retype);
                     input.addEventListener("blur", retype);
@@ -100,6 +90,24 @@
                 Base Magic Bars
                 <br>
                 <input type="number" step="1" id="magic-bars">
+            </label>
+        </div>
+        <h1>[Resource 3]</h1>
+        <div class="flex">
+            <label>
+                Base [Resource 3] Power
+                <br>
+                <input type="number" step="0.1" id="resource3-power">
+            </label>
+            <label>
+                Base [Resource 3] Cap
+                <br>
+                <input type="number" step="10000" id="resource3-cap">
+            </label>
+            <label>
+                Base [Resource 3] Bars
+                <br>
+                <input type="number" step="1" id="resource3-bars">
             </label>
         </div>
         <h1>Adventure</h1>
