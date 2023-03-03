@@ -9,11 +9,11 @@
         <script>
             var inputs;
             var balance = {
-                "em": {
-                    "Epower": 24, "Ecap": 900000, "Ebars": 45,
-                    "Mpower": 8, "Mcap": 300000, "Mbars": 15
+                "emr": {
+                    "Epower": 24e5, "Ecap": 900000e5, "Ebars": 45e5,
+                    "Mpower":  8e5, "Mcap": 300000e5, "Mbars": 15e5,
+                    "Rpower":   24, "Rcap":   900000, "Rbars":   45
                 },
-                "resource3": {"power": 8, "cap": 300000, "bars": 15},
                 "adventure": {"power": 50, "toughness": 50, "health": 500, "regen": 3},
             };
 
@@ -63,17 +63,17 @@
             <label>
                 Base Energy Power
                 <br>
-                <input type="number" step="0.1" id="em-Epower">
+                <input type="number" step="0.1" id="emr-Epower">
             </label>
             <label>
                 Base Energy Cap
                 <br>
-                <input type="number" step="10000" id="em-Ecap">
+                <input type="number" step="10000" id="emr-Ecap">
             </label>
             <label>
                 Base Energy Bars
                 <br>
-                <input type="number" step="1" id="em-Ebars">
+                <input type="number" step="1" id="emr-Ebars">
             </label>
         </div>
         <h1>Magic</h1>
@@ -81,35 +81,35 @@
             <label>
                 Base Magic Power
                 <br>
-                <input type="number" step="0.1" id="em-Mpower">
+                <input type="number" step="0.1" id="emr-Mpower">
             </label>
             <label>
                 Base Magic Cap
                 <br>
-                <input type="number" step="10000" id="em-Mcap">
+                <input type="number" step="10000" id="emr-Mcap">
             </label>
             <label>
                 Base Magic Bars
                 <br>
-                <input type="number" step="1" id="em-Mbars">
+                <input type="number" step="1" id="emr-Mbars">
             </label>
         </div>
-        <h1>[Resource 3]</h1>
+        <h1>Resource3</h1>
         <div class="flex">
             <label>
-                Base [Resource 3] Power
+                Base Resource3 Power
                 <br>
-                <input type="number" step="0.1" id="resource3-power">
+                <input type="number" step="0.1" id="emr-Rpower">
             </label>
             <label>
-                Base [Resource 3] Cap
+                Base Resource3 Cap
                 <br>
-                <input type="number" step="10000" id="resource3-cap">
+                <input type="number" step="10000" id="emr-Rcap">
             </label>
             <label>
-                Base [Resource 3] Bars
+                Base Resource3 Bars
                 <br>
-                <input type="number" step="1" id="resource3-bars">
+                <input type="number" step="1" id="emr-Rbars">
             </label>
         </div>
         <h1>Adventure</h1>
