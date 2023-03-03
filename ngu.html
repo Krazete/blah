@@ -52,6 +52,14 @@
                     input.addEventListener("blur", retype);
                     input.addEventListener("input", adjust);
                 }
+                for (var id0 of balance) {
+                    for (var id1 of balance[id0]) {
+                        break;
+                    }
+                    var input = document.getElementById([id0, id1].join("-"));
+                    input.value = balance[id0][id1];
+                    input.dispatchEvent(new InputEvent("input"));
+                }
             }
 
             window.addEventListener("load", init);
