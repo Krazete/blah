@@ -52,8 +52,8 @@
                     input.addEventListener("blur", retype);
                     input.addEventListener("input", adjust);
                 }
-                for (var id0 of balance) {
-                    for (var id1 of balance[id0]) {
+                for (var id0 in balance) {
+                    for (var id1 in balance[id0]) {
                         break;
                     }
                     var input = document.getElementById([id0, id1].join("-"));
