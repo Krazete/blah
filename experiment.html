@@ -39,26 +39,28 @@
     Promise.all([
         loadJSON("https://raw.githubusercontent.com/Krazete/sgm/temp/data/variants.json"),
         loadJSON("https://raw.githubusercontent.com/Krazete/sgm/temp/data/en.json")
-    ]).then(function (variants, corpus) {
-    var points = [];
-    for (var id in variants) {
-        var variant = variants[id];
-        var stat = maxStats(variant.stats);
-        points.push({
-            name: corpus[variant[id].name],
-            x: [stat.attack],
-            y: [stat.lifebar],
-            // marker: {color: ['pink', 'red', 'blue', 'green', 'purple', 'yellow'][variants[id].element], size: 8}
-            marker: {color: ['843', 'AAB', 'FD8', 'FCF'][variant.tier], size: 8}
+    ]).then(function (response) {
+        var variants = response[0];
+        var corpus = response[1];
+        var points = [];
+        for (var id in variants) {
+            var variant = variants[id];
+            var stat = maxStats(variant.stats);
+            points.push({
+                name: corpus[variant[id].name],
+                x: [stat.attack],
+                y: [stat.lifebar],
+                // marker: {color: ['pink', 'red', 'blue', 'green', 'purple', 'yellow'][variants[id].element], size: 8}
+                marker: {color: ['843', 'AAB', 'FD8', 'FCF'][variant.tier], size: 8}
+            });
+        }
+    
+        p=Plotly.newPlot('plotly', points, {
+            title: 'Variants (Max Stats at Diamond Tier)',
+            xaxis: {title: 'Attack'},
+            yaxis: {title: 'Health'},
+            hovermode: 'closest'
         });
-    }
-
-    p=Plotly.newPlot('plotly', points, {
-        title: 'Variants (Max Stats at Diamond Tier)',
-        xaxis: {title: 'Attack'},
-        yaxis: {title: 'Health'},
-        hovermode: 'closest'
-    });
     });
     </script>
 </body>
