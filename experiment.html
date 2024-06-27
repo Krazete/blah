@@ -25,11 +25,22 @@
         return new Promise(request);
     }
 
+    function maxStats(stats) {
+        var i = stats.length - 1;
+        var baseBoost = 1.5;
+        var baseATK = baseBoost * stats[i].attack;
+        var baseHP = baseBoost * stats[i].lifebar;
+        return {
+            attack: Math.ceil(baseATK + baseATK * 59 / 5),
+            lifebar: Math.ceil(baseHP + baseHP * 59 / 5)
+        };
+    }
+
     loadJSON("https://raw.githubusercontent.com/Krazete/sgm/temp/data/variants.json").then(function (variants) {
     var points = [];
     for (var id in variants) {
         var stats = variants[id].stats;
-        var stat = stats[stats.length - 1];
+        var stat = maxStats(stats);
         points.push({
             name: id,
             x: [stat.attack],
@@ -40,7 +51,7 @@
     }
 
     p=Plotly.newPlot('plotly', points, {
-        title: 'Variants (Base Stats at Diamond Tier)',
+        title: 'Variants (Max Stats at Diamond Tier)',
         xaxis: {title: 'Attack'},
         yaxis: {title: 'Health'},
         hovermode: 'closest'
