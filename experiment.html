@@ -36,17 +36,20 @@
         };
     }
 
-    loadJSON("https://raw.githubusercontent.com/Krazete/sgm/temp/data/variants.json").then(function (variants) {
+    Promise.all([
+        loadJSON("https://raw.githubusercontent.com/Krazete/sgm/temp/data/variants.json"),
+        loadJSON("https://raw.githubusercontent.com/Krazete/sgm/temp/data/en.json")
+    ]).then(function (variants, corpus) {
     var points = [];
     for (var id in variants) {
-        var stats = variants[id].stats;
-        var stat = maxStats(stats);
+        var variant = variants[id];
+        var stat = maxStats(variant.stats);
         points.push({
-            name: id,
+            name: corpus[variant[id].name],
             x: [stat.attack],
             y: [stat.lifebar],
             // marker: {color: ['pink', 'red', 'blue', 'green', 'purple', 'yellow'][variants[id].element], size: 8}
-            marker: {color: ['843', 'AAB', 'FD8', 'FCF'][variants[id].tier], size: 8}
+            marker: {color: ['843', 'AAB', 'FD8', 'FCF'][variant.tier], size: 8}
         });
     }
 
