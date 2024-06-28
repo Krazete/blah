@@ -2,6 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <style>
+        html {
+            background: #111;
+        }
+    </style>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
@@ -50,16 +55,19 @@
                 name: corpus[variant.name],
                 x: [stat.attack],
                 y: [stat.lifebar],
-                // marker: {color: ['pink', 'red', 'blue', 'green', 'purple', 'yellow'][variants[id].element], size: 8}
-                marker: {color: ['843', 'AAB', 'FD8', 'FCF'][variant.tier], size: 8}
+                // marker: {color: ['pink', 'red', 'blue', 'green', 'purple', 'yellow'][variant.element], size: 8}
+                marker: {color: ['brown', 'silver', 'gold', 'hotpink'][variant.tier], size: 8}
             });
         }
     
         p=Plotly.newPlot('plotly', points, {
-            title: 'Variants (Max Stats at Diamond Tier)',
-            xaxis: {title: 'Attack'},
-            yaxis: {title: 'Health'},
-            hovermode: 'closest'
+            title: {text: 'Variants (Max Stats at Diamond Tier)', font: {color: 'white'}},
+            legend: {font: {color: 'white'}},
+            xaxis: {title: 'Attack', color: 'white'},
+            yaxis: {title: 'Health', color: 'white'},
+            hovermode: 'closest',
+            paper_bgcolor: 'black',
+            plot_bgcolor: 'black'
         });
     });
     </script>
