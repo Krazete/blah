@@ -30,10 +30,11 @@
         return new Promise(request);
     }
 
-    function maxStats(stats) {
+    function maxStats(stats, scale) {
         var baseBoost = 1.5;
-        var baseATK = baseBoost * Math.round(stats[0].attack * Math.pow(1.8, stats.length)); /* calculated (estimate), not hard-coded (actual) */
-        var baseHP = baseBoost * Math.round(stats[0].lifebar * Math.pow(1.8, stats.length)); /* ^^^ */
+        var baseScale = Math.pow(scale, stats.length - 1); /* calculated (estimate), not hard-coded (actual) */
+        var baseATK = baseBoost * Math.round(stats[0].attack * baseScale);
+        var baseHP = baseBoost * Math.round(stats[0].lifebar * baseScale);
         return {
             attack: Math.ceil(baseATK * 64 / 5),
             lifebar: Math.ceil(baseHP * 64 / 5)
@@ -49,7 +50,7 @@
         var points = [];
         for (var id in variants) {
             var variant = variants[id];
-            var stat = maxStats(variant.stats);
+            var stat = maxStats(variant.stats, 1.8);
             points.push({
                 name: corpus[variant.name],
                 x: [stat.attack],
