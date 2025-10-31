@@ -43,7 +43,7 @@
     }
 
     var match = location.search.match(/[?&]evoscale=(\d*\.?\d*)/i);
-    var scale = match ? parseFloat(match[1]) || 1.8 : 1.8;
+    var scale = match ? parseFloat(match[1]) || 1.95 : 1.95;
     document.getElementById("scale").innerHTML = scale;
     
     Promise.all([
