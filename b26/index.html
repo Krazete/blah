@@ -31,8 +31,9 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            animation: b 1s linear infinite;
+            /* animation: b steps(23, end) infinite; */
             background-image: url('./frames/frame-001.bmp');
+            background-blend-mode: multiply;
         }
         #start {
             position: absolute;
@@ -44,30 +45,40 @@
             display: block;
         }
         @keyframes b {
-             0% {background-image: url('./frames/frame-001.bmp');}
-             4% {background-image: url('./frames/frame-002.bmp');}
-             8% {background-image: url('./frames/frame-003.bmp');}
-            12% {background-image: url('./frames/frame-004.bmp');}
-            16% {background-image: url('./frames/frame-005.bmp');}
-            20% {background-image: url('./frames/frame-006.bmp');}
-            25% {background-image: url('./frames/frame-007.bmp');}
-            29% {background-image: url('./frames/frame-008.bmp');}
-            33% {background-image: url('./frames/frame-009.bmp');}
-            37% {background-image: url('./frames/frame-010.bmp');}
-            41% {background-image: url('./frames/frame-011.bmp');}
-            45% {background-image: url('./frames/frame-012.bmp');}
-            50% {background-image: url('./frames/frame-013.bmp');}
-            54% {background-image: url('./frames/frame-014.bmp');}
-            58% {background-image: url('./frames/frame-015.bmp');}
-            62% {background-image: url('./frames/frame-016.bmp');}
-            66% {background-image: url('./frames/frame-017.bmp');}
-            70% {background-image: url('./frames/frame-018.bmp');}
-            75% {background-image: url('./frames/frame-019.bmp');}
-            79% {background-image: url('./frames/frame-020.bmp');}
-            83% {background-image: url('./frames/frame-021.bmp');}
-            87% {background-image: url('./frames/frame-022.bmp');}
-            91% {background-image: url('./frames/frame-023.bmp');}
-            95% {background-image: url('./frames/frame-024.bmp');}
+              0% {background-image: url('./frames/frame-001.bmp');}
+              4% {background-image: url('./frames/frame-002.bmp');}
+              8% {background-image: url('./frames/frame-003.bmp');}
+             12% {background-image: url('./frames/frame-004.bmp');}
+             16% {background-image: url('./frames/frame-005.bmp');}
+             20% {background-image: url('./frames/frame-006.bmp');}
+             25% {background-image: url('./frames/frame-007.bmp');}
+             29% {background-image: url('./frames/frame-008.bmp');}
+             33% {background-image: url('./frames/frame-009.bmp');}
+             37% {background-image: url('./frames/frame-010.bmp');}
+             41% {background-image: url('./frames/frame-011.bmp');}
+             45% {background-image: url('./frames/frame-012.bmp');}
+             50% {background-image: url('./frames/frame-013.bmp');}
+             54% {background-image: url('./frames/frame-014.bmp');}
+             58% {background-image: url('./frames/frame-015.bmp');}
+             62% {background-image: url('./frames/frame-016.bmp');}
+             66% {background-image: url('./frames/frame-017.bmp');}
+             70% {background-image: url('./frames/frame-018.bmp');}
+             75% {background-image: url('./frames/frame-019.bmp');}
+             79% {background-image: url('./frames/frame-020.bmp');}
+             83% {background-image: url('./frames/frame-021.bmp');}
+             87% {background-image: url('./frames/frame-022.bmp');}
+             91% {background-image: url('./frames/frame-023.bmp');}
+             95% {background-image: url('./frames/frame-024.bmp');}
+            100% {background-image: url('./frames/frame-001.bmp');}
+        }
+        @keyframes rainbow {
+              0% {background-color: #f88;}
+             17% {background-color: #ff8;}
+             33% {background-color: #8f8;}
+             50% {background-color: #8ff;}
+             67% {background-color: #88f;}
+             83% {background-color: #f8f;}
+            100% {background-color: #f88;}
         }
         #spiid {
             display: none;
@@ -101,12 +112,10 @@
         }
         function parrot() {
             if (!a1.paused && document.body.className != "slow") {
-                adjustSpeed(1000 * Math.pow(140/140, Math.E - 1));
-                // adjustSpeed(1000);
+                adjustSpeed(60000 / 70);
             }
             else if (!a2.paused && document.body.className != "fast") {
-                adjustSpeed(1000 * Math.pow(86/140, Math.E - 1));
-                // adjustSpeed(550);
+                adjustSpeed(60000 / 174);
             }
             else if (a1.paused && a2.paused) {
                 adjustSpeed(0);
@@ -117,7 +126,11 @@
             if (this.value) {
                 n = this.value;
             }
-            document.body.style.animationDuration = n + "ms";
+            // document.body.style.animationDuration = n + "ms";
+            document.body.style.animation = "b " + n + "ms steps(23, end) infinite";
+            if (n > 0 && n < 600) {
+                document.body.style.animation += ", rainbow " + n + "ms linear infinite";
+            }
         }
         parrot();
         speed.addEventListener("input", adjustSpeed);
